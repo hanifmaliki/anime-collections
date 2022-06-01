@@ -5,6 +5,13 @@ export const getAnimeList = async (page) => {
     const query = gql`
     query Page($page: Int) {
         Page(page: $page, perPage:10) {
+            pageInfo {
+                total
+                perPage
+                currentPage
+                lastPage
+                hasNextPage
+            }
             media(type: ANIME) {
                 id
                 coverImage {
@@ -30,8 +37,8 @@ export const getAnimeList = async (page) => {
         }
     });
 
-    if (data?.Page?.media !== null || data?.Page?.media !== undefined) {
-        return data.Page.media;
+    if (data?.Page !== null || data?.Page !== undefined) {
+        return data.Page;
     } else {
         return []
     }

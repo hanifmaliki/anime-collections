@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { Paper, CircularProgress, Typography, Button } from '@mui/material'
+import { Paper, CircularProgress, Button } from '@mui/material'
 import { OuterWrapper } from '../components/StyledComponents'
 import { getAnimeById } from '../graphql/ApiList'
 import styled from '@emotion/styled'
 import CharacterCard from '../components/CharacterCard'
 import CollectionModal from '../components/CollectionModal'
 import MyContext from '../context/MyContext'
-
-const Head = styled.div`
-  width: 100%;
-`
+import { HeaderWrapper } from '../components/StyledComponents'
 
 const Body = styled(Paper)`
   display: flex;
@@ -23,16 +20,6 @@ const Left = styled.div`
 
 const Right = styled.div`
 
-`
-
-const Title = styled(Typography)`
-  font-size: 20;
-  font-size: bold;
-  border-width: 1px 0 1px 0;
-  border-style: solid;
-  background-color: #e1e7f5;
-  border-top-color: #ebebeb;
-  border-bottom-color: #1d439b;
 `
 
 const CharacterListWrapper = styled.div`
@@ -67,9 +54,7 @@ const AnimeDetail = () => {
       {
         animeDetail ?
           <>
-            <Head>
-              <Title gutterBottom variant="h5" component="div">{animeDetail?.title?.romaji}</Title>
-            </Head>
+            <HeaderWrapper>{animeDetail?.title?.romaji}</HeaderWrapper>
             <Body elevation={2}>
               <Left>
                 <img src={animeDetail?.coverImage?.large} alt={animeDetail?.title?.romaji}></img>

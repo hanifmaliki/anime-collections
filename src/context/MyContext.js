@@ -4,7 +4,11 @@ const MyContext = createContext({
     animeCol: [],
     setAnimeCol: (data) => { },
     bulkAdd: true,
-    setBulkAdd: (data) => { }
+    setBulkAdd: (data) => { },
+    loading: false,
+    setLoading: (data) => { },
+    currentPage: 1,
+    setCurrentPage: (data) => { },
 });
 
 export default MyContext;

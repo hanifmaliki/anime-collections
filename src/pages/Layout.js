@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Outlet, useNavigate } from "react-router-dom";
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,9 +11,30 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { LiveTv } from '@mui/icons-material';
+import styled from '@emotion/styled';
+import { CircularProgress } from '@mui/material'
+import MyContext from '../context/MyContext';
+
+const WebTitle = styled(Typography)`
+    font-family: tahoma,sans-serif;
+`
+
+const Loading = styled.div`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgb(131 129 129 / 63%);
+    display: flex;
+    top: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+`
 
 const Layout = () => {
     const navigate = useNavigate();
+    const { loading } = useContext(MyContext);
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
@@ -32,7 +52,7 @@ const Layout = () => {
                     <Toolbar disableGutters>
                         {/* Desktop */}
                         <LiveTv sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                        <Typography
+                        <WebTitle
                             variant="h6"
                             noWrap
                             component="a"
@@ -40,7 +60,6 @@ const Layout = () => {
                             sx={{
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
                                 fontWeight: 700,
                                 letterSpacing: '.3rem',
                                 color: 'inherit',
@@ -48,7 +67,7 @@ const Layout = () => {
                             }}
                         >
                             BukanMyAnimeList
-                        </Typography>
+                        </WebTitle>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -90,16 +109,15 @@ const Layout = () => {
 
                         {/* Mobile */}
                         <LiveTv sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                        <Typography
+                        <WebTitle
                             variant="h5"
                             noWrap
                             component="a"
-                            href=""
+                            href="/"
                             sx={{
                                 mr: 2,
                                 display: { xs: 'flex', md: 'none' },
                                 flexGrow: 1,
-                                fontFamily: 'monospace',
                                 fontWeight: 700,
                                 letterSpacing: '.3rem',
                                 color: 'inherit',
@@ -107,7 +125,7 @@ const Layout = () => {
                             }}
                         >
                             BukanMyAnimeList
-                        </Typography>
+                        </WebTitle>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <Button
                                 onClick={() => navigate('/')}
@@ -126,6 +144,11 @@ const Layout = () => {
                 </Container>
             </AppBar>
             <Outlet />
+            {
+                loading && <Loading>
+                    <CircularProgress />
+                </Loading>
+            }
         </>
     )
 };

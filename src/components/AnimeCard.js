@@ -18,7 +18,7 @@ export default function AnimeCard(props) {
                     component="img"
                     height="140"
                     image={anime.bannerImage}
-                    alt="green iguana"
+                    alt={anime.title?.romaji}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div" style={{ fontSize: '18px' }}>

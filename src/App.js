@@ -14,10 +14,15 @@ import { useState } from 'react';
 function App() {
   const [animeCol, setAnimeCol] = useState([]);
   const [bulkAdd, setBulkAdd] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1)
 
   return (
     <ApolloProvider client={client}>
-      <MyContext.Provider value={{ animeCol, setAnimeCol, bulkAdd, setBulkAdd }}>
+      <MyContext.Provider value={{
+        animeCol, setAnimeCol, bulkAdd, setBulkAdd,
+        loading, setLoading, currentPage, setCurrentPage
+      }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>

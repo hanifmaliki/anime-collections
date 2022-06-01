@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { Select, TextField } from '@mui/material';
 import CollectionModalCard from './CollectionModalCard';
+import NewCollectionModal from './NewCollectionModal';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -55,6 +56,7 @@ export default function CollectionModal({ open, setOpen }) {
     const { animeCol, bulkAdd } = useContext(MyContext);
     const [collectionList, setCollectionList] = useState(JSON.parse(localStorage.getItem('collections')))
     const [selectedId, setSelectedId] = useState('')
+    const [openNewCol, setOpenNewCol] = useState(false)
 
     const handleOnSelect = (value) => {
         setSelectedId(value)
@@ -127,8 +129,9 @@ export default function CollectionModal({ open, setOpen }) {
                     />}
             </DialogContent>
             <DialogContent style={{ display: 'flex', gap: '8px' }}>
-                {collectionList.map(el => {
+                {collectionList.map((el, idx) => {
                     return <CollectionModalCard
+                        key={idx}
                         text={el.title}
                         onClick={() => { handleClickCollection(el) }}
                         backgroundColor='white'
@@ -136,10 +139,15 @@ export default function CollectionModal({ open, setOpen }) {
                 })}
                 <CollectionModalCard
                     text={'Create New Collection'}
-                    onClick={() => { handleNewCollection('Test') }}
+                    onClick={() => { setOpenNewCol(true) }}
                     backgroundColor='white'
                 />
             </DialogContent>
+            <NewCollectionModal
+                open={openNewCol}
+                setOpen={setOpenNewCol}
+                onSubmit={(value) => { handleNewCollection(value) }}
+            />
         </BootstrapDialog>
     );
 }

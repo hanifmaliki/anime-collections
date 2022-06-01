@@ -1,6 +1,7 @@
 import React from 'react'
 import CollectionCard from '../components/CollectionCard'
 import { OuterWrapper, ListWrapper } from '../components/StyledComponents'
+import { HeaderWrapper } from '../components/StyledComponents'
 
 const CollectionList = () => {
   const collectionList = [
@@ -56,6 +57,7 @@ const CollectionList = () => {
 
   return (
     <OuterWrapper>
+      <HeaderWrapper>Collection List</HeaderWrapper>
       <ListWrapper>
         {collectionList.map((el, idx) => {
           return <CollectionCard
