@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import AnimeCard from '../components/AnimeCard'
 import { getAnimeList } from '../graphql/ApiList'
 import styled from '@emotion/styled'
-import { CircularProgress, Pagination, Fab } from '@mui/material'
+import { Pagination, Fab } from '@mui/material'
 import { OuterWrapper, ListWrapper } from '../components/StyledComponents'
 import { Favorite as FavoriteIcon } from '@mui/icons-material'
 import CollectionModal from '../components/CollectionModal'
@@ -46,15 +46,13 @@ const AnimeList = () => {
       <HeaderWrapper>Anime List</HeaderWrapper>
       <ListWrapper>
         {
-          animeList.length > 0 ?
-            animeList.map((el, idx) => {
-              return <AnimeCard
-                anime={el}
-                key={idx}
-              />
-            })
-            :
-            <CircularProgress />
+          animeList.length > 0 &&
+          animeList.map((el, idx) => {
+            return <AnimeCard
+              anime={el}
+              key={idx}
+            />
+          })
         }
       </ListWrapper>
       {

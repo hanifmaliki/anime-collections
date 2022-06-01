@@ -10,9 +10,16 @@ import MyContext from '../context/MyContext';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import { Select, TextField } from '@mui/material';
+import { Select, TextField, Button } from '@mui/material';
 import CollectionModalCard from './CollectionModalCard';
 import NewCollectionModal from './NewCollectionModal';
+
+const CardWrapper = styled(DialogContent)`
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+`
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -56,20 +63,21 @@ export default function CollectionModal({ open, setOpen }) {
     const { animeCol, bulkAdd } = useContext(MyContext);
     const [collectionList, setCollectionList] = useState(JSON.parse(localStorage.getItem('collections')))
     const [selectedId, setSelectedId] = useState('')
+    const [selectedIdx, setSelectedIdx] = useState('')
     const [openNewCol, setOpenNewCol] = useState(false)
 
     const handleOnSelect = (value) => {
-        setSelectedId(value)
+        const [id, idx] = value.split(',')
+        setSelectedId(id)
+        setSelectedIdx(idx)
     }
 
     const handleClickCollection = (col) => {
-        if (!bulkAdd && selectedId !== '') {
+        if (!bulkAdd || selectedId !== '') {
             let collections = JSON.parse(localStorage.getItem('collections'))
             collections.forEach(el => {
                 if (el.title === col.title) {
-                    console.log(bulkAdd)
-                    console.log(animeCol[selectedId])
-                    el['animeList'].push(bulkAdd ? animeCol[selectedId] : animeCol[0])
+                    el['animeList'].push(bulkAdd ? animeCol[selectedIdx] : animeCol[0])
                 }
             })
             setCollectionList(collections);
@@ -102,7 +110,7 @@ export default function CollectionModal({ open, setOpen }) {
                 console.log(animeCol)
                 console.log(JSON.parse(localStorage.getItem('collections')))
             }} id="customized-dialog-title" onClose={() => setOpen(false)}>
-                Add to Collection
+                {bulkAdd ? 'Select Anime & Collection' : 'Select Collection'}
             </BootstrapDialogTitle>
             <DialogContent dividers>
                 {bulkAdd ?
@@ -111,12 +119,14 @@ export default function CollectionModal({ open, setOpen }) {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={selectedId}
+                            value={selectedId ? selectedId + ',' + selectedIdx : ''}
                             label="Anime"
-                            onChange={(event) => handleOnSelect(event.target.value)}
+                            onChange={(event) => {
+                                handleOnSelect(event.target.value)
+                            }}
                         >
                             {animeCol.map((el, idx) => {
-                                return <MenuItem key={idx} value={idx}>{el.title.romaji}</MenuItem>
+                                return <MenuItem key={idx} value={el.id + ',' + idx}>{el.title.romaji}</MenuItem>
                             })}
                         </Select>
                     </FormControl>
@@ -125,24 +135,32 @@ export default function CollectionModal({ open, setOpen }) {
                         disabled
                         id="outlined-disabled"
                         label="Anime"
+                        style={{ width: '100%' }}
                         defaultValue={animeCol[0].title.romaji}
                     />}
             </DialogContent>
-            <DialogContent style={{ display: 'flex', gap: '8px' }}>
+            <h3 style={{ margin: 0, paddingTop: 10, paddingLeft: '16px', fontWeight: 'normal' }}>Collections</h3>
+            <CardWrapper>
                 {collectionList.map((el, idx) => {
+                    // eslint-disable-next-line
+                    let alreadyIn = el.animeList?.filter((a) => bulkAdd ? a?.id == selectedId : a?.id == animeCol[0].id).length
                     return <CollectionModalCard
                         key={idx}
                         text={el.title}
-                        onClick={() => { handleClickCollection(el) }}
-                        backgroundColor='white'
+                        onClick={() => {
+                            alreadyIn ?
+                                alert('Sudah ditambahan ke collection, silahkan pindah ke page collection untuk menghapus') :
+                                handleClickCollection(el)
+                        }}
+                        backgroundColor={alreadyIn ? '#33a13c' : '#5583c3'}
                     />
                 })}
-                <CollectionModalCard
-                    text={'Create New Collection'}
-                    onClick={() => { setOpenNewCol(true) }}
-                    backgroundColor='white'
-                />
-            </DialogContent>
+            </CardWrapper>
+            <Button
+                variant="contained"
+                onClick={() => { setOpenNewCol(true) }}
+                style={{ margin: '0px 16px 16px 16px' }}
+            >Create New Collection</Button>
             <NewCollectionModal
                 open={openNewCol}
                 setOpen={setOpenNewCol}

@@ -19,9 +19,10 @@ export default function NewCollectionModal({ open, setOpen, onSubmit }) {
                     id="name"
                     label="Collection Name"
                     type="text"
+                    value={name}
                     fullWidth
                     variant="standard"
-                    onChange={(event) => setName(event.target.value)}
+                    onChange={(event) => setName(event.target.value.replace(/[^a-zA-Z0-9 ]/g, ''))}
                 />
             </DialogContent>
             <DialogActions>
