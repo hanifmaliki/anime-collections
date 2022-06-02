@@ -6,12 +6,17 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import NoImage from '../noImage.gif'
+import { ActionWrapper, DeleteButton, EditButton } from './StyledComponents';
 
 export default function CollectionCard(props) {
     const navigate = useNavigate();
-    const { data, index } = props
+    const { data, index, onDelete, onEdit } = props
     return (
         <Card sx={{ maxWidth: 345 }}>
+            <ActionWrapper>
+                <DeleteButton onClick={() => onDelete()} />
+                <EditButton onClick={() => onEdit()} />
+            </ActionWrapper>
             <CardActionArea
                 sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}
                 onClick={() => navigate('/collection-detail/' + index)}

@@ -5,12 +5,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { ActionWrapper, DeleteButton } from './StyledComponents';
 
 export default function AnimeCard(props) {
     const navigate = useNavigate();
-    const { anime } = props
+    const { anime, canDelete = false, onDelete = () => { } } = props
     return (
         <Card sx={{ maxWidth: 345 }}>
+            {canDelete && <ActionWrapper>
+                <DeleteButton onClick={() => onDelete()} />
+            </ActionWrapper>}
             <CardActionArea
                 onClick={() => navigate('/anime-detail/' + anime.id)}
             >

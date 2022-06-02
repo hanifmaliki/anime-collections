@@ -1,3 +1,4 @@
+import { DeleteForever, Edit } from '@mui/icons-material';
 import styled from "@emotion/styled";
 
 export const OuterWrapper = styled.div`
@@ -24,4 +25,31 @@ export const ListWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+`
+
+export const ActionWrapper = styled.div`
+    position: absolute;
+    z-index: 1000;
+    background-color: #525151a1;
+    margin: 6px 0 0 6px;
+    padding: 3px;
+    border-radius: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+`
+
+export const DeleteButton = styled(DeleteForever)`
+    color: white;
+    &:hover {
+        color: red;
+    }
+`
+
+export const EditButton = styled(Edit)`
+    color: white;
+    &:hover {
+        color: red;
+    }
 `

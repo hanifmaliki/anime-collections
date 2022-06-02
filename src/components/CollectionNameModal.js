@@ -6,12 +6,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function CollectionNameModal({ open, setOpen, onSubmit, edit = false }) {
+export default function CollectionNameModal({ open, setOpen, onSubmit, edit = false, selectedCol = {} }) {
     const [name, setName] = React.useState('')
 
     return (
         <Dialog open={open} onClose={() => { setOpen(false) }}>
-            <DialogTitle>{edit ? 'Edit Collection' : 'New Collection'}</DialogTitle>
+            <DialogTitle>{edit ? `Edit "${selectedCol?.title}" Collection` : 'New Collection'}</DialogTitle>
             <DialogContent>
                 <TextField
                     autoFocus
