@@ -1,17 +1,17 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { ActionWrapper, DeleteButton } from './StyledComponents';
+import { ActionWrapper, DeleteButton, PrimaryCard } from './StyledComponents';
+import DefaultBanner from '../defaultBanner.jpg'
 
 export default function AnimeCard(props) {
     const navigate = useNavigate();
     const { anime, canDelete = false, onDelete = () => { } } = props
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <PrimaryCard>
             {canDelete && <ActionWrapper>
                 <DeleteButton onClick={() => onDelete()} />
             </ActionWrapper>}
@@ -21,7 +21,7 @@ export default function AnimeCard(props) {
                 <CardMedia
                     component="img"
                     height="140"
-                    image={anime.bannerImage}
+                    image={anime.bannerImage || DefaultBanner}
                     alt={anime.title?.romaji}
                 />
                 <CardContent>
@@ -30,6 +30,6 @@ export default function AnimeCard(props) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-        </Card>
+        </PrimaryCard>
     );
 }

@@ -18,6 +18,13 @@ const FavoriteButton = styled(Fab)`
   }
 `
 
+const StyledPagination = styled(Pagination)`
+  & > ul {
+    display: flex;
+    justify-content: center;
+  }
+`
+
 const AnimeList = () => {
   const [animeList, setAnimeList] = useState([])
   const [openColMod, setOpenColMod] = useState(false)
@@ -56,7 +63,7 @@ const AnimeList = () => {
         }
       </ListWrapper>
       {
-        animeList.length > 0 && <Pagination
+        animeList.length > 0 && <StyledPagination
           page={currentPage}
           onChange={(event, page) => setCurrentPage(page)}
           count={pageInfo.lastPage}

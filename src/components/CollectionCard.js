@@ -1,18 +1,17 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import NoImage from '../noImage.gif'
-import { ActionWrapper, DeleteButton, EditButton } from './StyledComponents';
+import DefaultBanner from '../defaultBanner.jpg'
+import { ActionWrapper, DeleteButton, EditButton, PrimaryCard } from './StyledComponents';
 
 export default function CollectionCard(props) {
     const navigate = useNavigate();
     const { data, index, onDelete, onEdit } = props
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <PrimaryCard>
             <ActionWrapper>
                 <DeleteButton onClick={() => onDelete()} />
                 <EditButton onClick={() => onEdit()} />
@@ -34,8 +33,8 @@ export default function CollectionCard(props) {
                     {
                         data.animeList.length < 1 && <CardMedia
                             component="img"
-                            sx={{ width: 90 }}
-                            image={NoImage}
+                            height="140"
+                            image={DefaultBanner}
                             alt={'No Anime'}
                         />
                     }
@@ -46,6 +45,6 @@ export default function CollectionCard(props) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-        </Card>
+        </PrimaryCard>
     );
 }
