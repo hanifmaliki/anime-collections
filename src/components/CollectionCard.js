@@ -20,12 +20,12 @@ export default function CollectionCard(props) {
                 sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}
                 onClick={() => navigate('/collection-detail/' + index)}
             >
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', maxHeight: '70%' }}>
                     {data.animeList.map((el, idx) => {
                         return idx <= 5 ? <CardMedia
                             key={idx}
                             component="img"
-                            sx={{ width: 80 }}
+                            sx={{ width: '27%' }}
                             image={el.coverImage.large}
                             alt={el.title}
                         /> : ''

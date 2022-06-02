@@ -58,6 +58,7 @@ export const EditButton = styled(Edit)`
 
 export const PrimaryCard = styled(Card)`
     width: 31%;
+    max-height: 250px;
 
     @media (min-width:550px) and (max-width:850px) {
         width: 48%;

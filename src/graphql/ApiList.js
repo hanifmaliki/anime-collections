@@ -56,6 +56,8 @@ export const getAnimeById = async (id) => {
             color
         }
         bannerImage
+        episodes
+        genres
         synonyms
         title {
             romaji
