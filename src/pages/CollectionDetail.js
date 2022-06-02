@@ -1,67 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import AnimeCard from '../components/AnimeCard'
 import { OuterWrapper, ListWrapper } from '../components/StyledComponents'
+import { HeaderWrapper } from '../components/StyledComponents'
+import CollectionNameModal from '../components/CollectionNameModal'
+import { Edit } from '@mui/icons-material'
+import styled from '@emotion/styled'
+
+const EditCollection = styled(Edit)`
+  margin-left: 10px;
+  &:hover {
+    color: red;
+  }
+`
 
 const CollectionDetail = () => {
-  const { id: collectionId } = useParams();
-  const collectionList = [
-    {
-      id: 1,
-      title: "Satu",
-      animeList: [
-        {
-          id: 1,
-          title: "Ani1",
-          cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx104-fUBucj3ywYzH.png",
-          banner: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/104-mDlXkxzl27ja.jpg"
-        },
-        {
-          id: 2,
-          title: "Ani1",
-          cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx104-fUBucj3ywYzH.png",
-          banner: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/104-mDlXkxzl27ja.jpg"
-        },
-        {
-          id: 3,
-          title: "Ani1",
-          cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx104-fUBucj3ywYzH.png",
-          banner: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/104-mDlXkxzl27ja.jpg"
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: "Satu",
-      animeList: [
-        {
-          id: 1,
-          title: "Ani1",
-          cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx104-fUBucj3ywYzH.png",
-          banner: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/104-mDlXkxzl27ja.jpg"
-        },
-        {
-          id: 2,
-          title: "Ani1",
-          cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx104-fUBucj3ywYzH.png",
-          banner: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/104-mDlXkxzl27ja.jpg"
-        },
-        {
-          id: 3,
-          title: "Ani1",
-          cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx104-fUBucj3ywYzH.png",
-          banner: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/104-mDlXkxzl27ja.jpg"
-        }
-      ]
-    }
-  ]
+  const { idx: index } = useParams();
+  // eslint-disable-next-line
+  const [collectionList, setCollectionList] = useState(JSON.parse(localStorage.getItem('collections') || '[]'))
+  const [openEditCol, setOpenEditCol] = useState(false)
+
+  const handleEditCollection = (title) => {
+    let new_item = [...collectionList]
+    new_item[index].title = title;
+    setCollectionList(new_item);
+    localStorage.setItem('collections', JSON.stringify(new_item));
+  }
 
   return (
     <OuterWrapper>
+      <HeaderWrapper>
+        Collection: {collectionList[index].title}
+        <EditCollection onClick={() => setOpenEditCol(true)}></EditCollection>
+      </HeaderWrapper>
       <ListWrapper>
         {
-          collectionList[collectionId].animeList?.length > 0 ?
-            collectionList[collectionId].animeList.map((el, idx) => {
+          collectionList[index].animeList?.length > 0 ?
+            collectionList[index].animeList.map((el, idx) => {
               return <AnimeCard
                 anime={el}
                 key={idx}
@@ -71,6 +46,12 @@ const CollectionDetail = () => {
             <div><span>No Data</span></div>
         }
       </ListWrapper>
+      <CollectionNameModal
+        open={openEditCol}
+        setOpen={setOpenEditCol}
+        onSubmit={(value) => { handleEditCollection(value) }}
+        edit={true}
+      />
     </OuterWrapper>
   )
 }

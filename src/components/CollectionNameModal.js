@@ -6,12 +6,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function NewCollectionModal({ open, setOpen, onSubmit }) {
+export default function CollectionNameModal({ open, setOpen, onSubmit, edit = false }) {
     const [name, setName] = React.useState('')
 
     return (
         <Dialog open={open} onClose={() => { setOpen(false) }}>
-            <DialogTitle>New Collection</DialogTitle>
+            <DialogTitle>{edit ? 'Edit Collection' : 'New Collection'}</DialogTitle>
             <DialogContent>
                 <TextField
                     autoFocus
@@ -28,7 +28,7 @@ export default function NewCollectionModal({ open, setOpen, onSubmit }) {
             <DialogActions>
                 <Button onClick={() => { setOpen(false) }}>Cancel</Button>
                 <Button onClick={() => {
-                    const sameName = JSON.parse(localStorage.getItem('collections')).filter((el) => el.title === name);
+                    const sameName = JSON.parse(localStorage.getItem('collections') || '[]').filter((el) => el.title === name);
                     if (!name) {
                         alert('Isi nama dahulu')
                     }

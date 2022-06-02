@@ -29,7 +29,7 @@ function App() {
               <Route index element={<AnimeList />} />
               <Route path="anime-detail/:id" element={<AnimeDetail />} />
               <Route path="collection-list" element={<CollectionList />} />
-              <Route path="collection-detail/:id" element={<CollectionDetail />} />
+              <Route path="collection-detail/:idx" element={<CollectionDetail />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>

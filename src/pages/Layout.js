@@ -124,7 +124,7 @@ const Layout = () => {
                                 textDecoration: 'none',
                             }}
                         >
-                            BukanMyAnimeList
+                            BMAL
                         </WebTitle>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <Button

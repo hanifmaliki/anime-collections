@@ -3,7 +3,7 @@ import React from 'react'
 const NoPage = () => {
   return (
     <div>
-      NoPage
+      Nyari apa bro, url nya salah
     </div>
   )
 }

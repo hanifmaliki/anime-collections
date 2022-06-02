@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { Select, TextField, Button } from '@mui/material';
 import CollectionModalCard from './CollectionModalCard';
-import NewCollectionModal from './NewCollectionModal';
+import CollectionNameModal from './CollectionNameModal';
 
 const CardWrapper = styled(DialogContent)`
     display: flex;
@@ -61,7 +61,7 @@ BootstrapDialogTitle.propTypes = {
 
 export default function CollectionModal({ open, setOpen }) {
     const { animeCol, bulkAdd } = useContext(MyContext);
-    const [collectionList, setCollectionList] = useState(JSON.parse(localStorage.getItem('collections')))
+    const [collectionList, setCollectionList] = useState(JSON.parse(localStorage.getItem('collections') || '[]'))
     const [selectedId, setSelectedId] = useState('')
     const [selectedIdx, setSelectedIdx] = useState('')
     const [openNewCol, setOpenNewCol] = useState(false)
@@ -74,7 +74,7 @@ export default function CollectionModal({ open, setOpen }) {
 
     const handleClickCollection = (col) => {
         if (!bulkAdd || selectedId !== '') {
-            let collections = JSON.parse(localStorage.getItem('collections'))
+            let collections = JSON.parse(localStorage.getItem('collections') || '[]')
             collections.forEach(el => {
                 if (el.title === col.title) {
                     el['animeList'].push(bulkAdd ? animeCol[selectedIdx] : animeCol[0])
@@ -82,6 +82,7 @@ export default function CollectionModal({ open, setOpen }) {
             })
             setCollectionList(collections);
             localStorage.setItem('collections', JSON.stringify(collections));
+            alert('Anime berhasil ditambahkan ke collection');
         }
         else {
             alert('Pilih Anime terlebih dahulu')
@@ -89,7 +90,7 @@ export default function CollectionModal({ open, setOpen }) {
     }
 
     const handleNewCollection = (title) => {
-        const colStr = localStorage.getItem('collections') || ''
+        const colStr = localStorage.getItem('collections') || '[]'
         let colObj = [];
         colStr && (colObj = JSON.parse(colStr));
         colObj.push({
@@ -106,10 +107,7 @@ export default function CollectionModal({ open, setOpen }) {
             aria-labelledby="customized-dialog-title"
             open={open}
         >
-            <BootstrapDialogTitle onClick={() => {
-                console.log(animeCol)
-                console.log(JSON.parse(localStorage.getItem('collections')))
-            }} id="customized-dialog-title" onClose={() => setOpen(false)}>
+            <BootstrapDialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}>
                 {bulkAdd ? 'Select Anime & Collection' : 'Select Collection'}
             </BootstrapDialogTitle>
             <DialogContent dividers>
@@ -149,7 +147,7 @@ export default function CollectionModal({ open, setOpen }) {
                         text={el.title}
                         onClick={() => {
                             alreadyIn ?
-                                alert('Sudah ditambahan ke collection, silahkan pindah ke page collection untuk menghapus') :
+                                alert('Sudah ditambahan ke collection ini, silahkan pindah ke page collection untuk menghapus') :
                                 handleClickCollection(el)
                         }}
                         backgroundColor={alreadyIn ? '#33a13c' : '#5583c3'}
@@ -161,7 +159,7 @@ export default function CollectionModal({ open, setOpen }) {
                 onClick={() => { setOpenNewCol(true) }}
                 style={{ margin: '0px 16px 16px 16px' }}
             >Create New Collection</Button>
-            <NewCollectionModal
+            <CollectionNameModal
                 open={openNewCol}
                 setOpen={setOpenNewCol}
                 onSubmit={(value) => { handleNewCollection(value) }}
