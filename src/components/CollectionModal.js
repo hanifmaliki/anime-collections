@@ -28,6 +28,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogActions-root': {
         padding: theme.spacing(1),
     },
+    '& .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm': {
+        width: '80%',
+        '@media (min-width:0px) and (max-width:500px)': {
+            width: '100%'
+        }
+    },
 }));
 
 const BootstrapDialogTitle = (props) => {
@@ -147,10 +153,10 @@ export default function CollectionModal({ open, setOpen }) {
                         text={el.title}
                         onClick={() => {
                             alreadyIn ?
-                                alert('Sudah ditambahan ke collection ini, silahkan pindah ke page collection untuk menghapus') :
+                                alert('Anime sudah pernah ditambahan ke collection ini, silahkan pindah ke page collection untuk menghapus') :
                                 handleClickCollection(el)
                         }}
-                        backgroundColor={alreadyIn ? '#33a13c' : '#5583c3'}
+                        backgroundColor={alreadyIn ? '#33a13c' : '#4579c1'}
                     />
                 })}
             </CardWrapper>

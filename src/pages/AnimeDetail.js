@@ -22,6 +22,7 @@ const SubTitle = styled.h2`
   margin-bottom: 10px;
   border-top: 1px solid #c8c8c8;
   border-bottom: 2px solid #c8c8c8;
+  margin-top: 15px;
   padding-bottom: 5px;
   width: 100%;
 `
@@ -52,7 +53,6 @@ const Right = styled.div`
 const ButtonCollection = styled(Button)`
   width: 100%;
   margin-top: 10px;
-  margin-bottom: 15px;
 `
 
 const CharacterListWrapper = styled.div`
@@ -94,9 +94,12 @@ const AnimeDetail = () => {
                 <ButtonCollection variant="contained" onClick={() => handleClickCollection(true)}>Add to My Collections</ButtonCollection>
                 <div style={{ width: '100%' }}>
                   <SubTitle>Alternative Titles</SubTitle>
-                  <div><span style={{ fontWeight: 'bold' }}>Synonyms: </span>{animeDetail.synonyms.join(', ')}</div>
+                  <div><span style={{ fontWeight: 'bold' }}>Synonyms: </span>{animeDetail.synonyms?.join(', ')}</div>
                   <div><span style={{ fontWeight: 'bold' }}>Japanese: </span>{animeDetail.title.native}</div>
                   <div><span style={{ fontWeight: 'bold' }}>English: </span>{animeDetail.title?.english || '-'}</div>
+                  <SubTitle>Information</SubTitle>
+                  <div><span style={{ fontWeight: 'bold' }}>Episodes: </span>{animeDetail.episodes}</div>
+                  <div><span style={{ fontWeight: 'bold' }}>Genres: </span>{animeDetail.genres?.join(', ')}</div>
                 </div>
               </Left>
               <Right>
