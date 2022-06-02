@@ -4,10 +4,24 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import styled from '@emotion/styled';
+
+const CharCard = styled(Card)`
+    display: flex;
+    width: 32%;
+
+    @media (min-width:550px) and (max-width:850px) {
+        width: 48%;
+    }
+
+    @media (min-width:0px) and (max-width:550px) {
+        width: 100%;
+    }
+`
 
 const CharacterCard = ({ data }) => {
     return (
-        <Card sx={{ display: 'flex', width: '265px' }}>
+        <CharCard>
             <CardMedia
                 component="img"
                 sx={{ width: 85 }}
@@ -28,7 +42,7 @@ const CharacterCard = ({ data }) => {
                     </Typography>
                 </CardContent>
             </Box>
-        </Card>
+        </CharCard>
     )
 }
 

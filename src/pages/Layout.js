@@ -37,11 +37,11 @@ const Layout = () => {
     const { loading } = useContext(MyContext);
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = async (event) => {
         setAnchorElNav(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = async () => {
         setAnchorElNav(null);
     };
 

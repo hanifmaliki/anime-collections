@@ -1,4 +1,5 @@
 import { DeleteForever, Edit } from '@mui/icons-material';
+import Card from '@mui/material/Card';
 import styled from "@emotion/styled";
 
 export const OuterWrapper = styled.div`
@@ -25,6 +26,7 @@ export const ListWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  width: 100%;
 `
 
 export const ActionWrapper = styled.div`
@@ -51,5 +53,17 @@ export const EditButton = styled(Edit)`
     color: white;
     &:hover {
         color: red;
+    }
+`
+
+export const PrimaryCard = styled(Card)`
+    width: 31%;
+
+    @media (min-width:550px) and (max-width:850px) {
+        width: 48%;
+    }
+
+    @media (min-width:0px) and (max-width:550px) {
+        width: 100%;
     }
 `

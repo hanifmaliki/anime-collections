@@ -66,13 +66,13 @@ export default function CollectionModal({ open, setOpen }) {
     const [selectedIdx, setSelectedIdx] = useState('')
     const [openNewCol, setOpenNewCol] = useState(false)
 
-    const handleOnSelect = (value) => {
+    const handleOnSelect = async (value) => {
         const [id, idx] = value.split(',')
         setSelectedId(id)
         setSelectedIdx(idx)
     }
 
-    const handleClickCollection = (col) => {
+    const handleClickCollection = async (col) => {
         if (!bulkAdd || selectedId !== '') {
             let collections = JSON.parse(localStorage.getItem('collections') || '[]')
             collections.forEach(el => {
@@ -89,7 +89,7 @@ export default function CollectionModal({ open, setOpen }) {
         }
     }
 
-    const handleNewCollection = (title) => {
+    const handleNewCollection = async (title) => {
         const colStr = localStorage.getItem('collections') || '[]'
         let colObj = [];
         colStr && (colObj = JSON.parse(colStr));

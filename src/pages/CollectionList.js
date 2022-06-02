@@ -18,7 +18,7 @@ const CollectionList = () => {
     setCollectionList(JSON.parse(localStorage.getItem('collections') || '[]'))
   }, [])
 
-  const handleNewCollection = (title) => {
+  const handleNewCollection = async (title) => {
     let new_item = [...collectionList]
     new_item.push({
       title: title,
@@ -28,26 +28,26 @@ const CollectionList = () => {
     localStorage.setItem('collections', JSON.stringify(new_item));
   }
 
-  const handleClickButtonEdit = (col, idx) => {
+  const handleClickButtonEdit = async (col, idx) => {
     setOpenEditCol(true);
     setSelectedCol(col);
     setSelectedIdx(idx);
   }
 
-  const handleEditCollection = (title) => {
+  const handleEditCollection = async (title) => {
     let new_item = [...collectionList]
     new_item[selectedIdx].title = title;
     setCollectionList(new_item);
     localStorage.setItem('collections', JSON.stringify(new_item));
   }
 
-  const handleClickButtonDelete = (col, idx) => {
+  const handleClickButtonDelete = async (col, idx) => {
     setOpenDeleteCol(true);
     setSelectedCol(col);
     setSelectedIdx(idx);
   }
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     let new_item = [...collectionList]
     new_item.splice(selectedIdx, 1);
     setCollectionList(new_item);

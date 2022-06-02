@@ -23,20 +23,20 @@ const CollectionDetail = () => {
   const [selectedAnime, setSelectedAnime] = useState({});
   const [selectedIdx, setSelectedIdx] = useState('');
 
-  const handleEditCollection = (title) => {
+  const handleEditCollection = async (title) => {
     let new_item = [...collectionList]
     new_item[index].title = title;
     setCollectionList(new_item);
     localStorage.setItem('collections', JSON.stringify(new_item));
   }
 
-  const handleClickDeleteButton = (anime, idx) => {
+  const handleClickDeleteButton = async (anime, idx) => {
     setOpenDeleteAnime(true);
     setSelectedAnime(anime);
     setSelectedIdx(idx);
   }
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     let new_item = [...collectionList]
     new_item[index].animeList.splice(selectedIdx, 1);
     setCollectionList(new_item);
