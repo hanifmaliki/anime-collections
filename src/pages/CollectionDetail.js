@@ -61,7 +61,7 @@ const CollectionDetail = () => {
               />
             })
             :
-            <div><span>No Data</span></div>
+            <div><span>No Anime</span></div>
         }
       </ListWrapper>
       <CollectionNameModal

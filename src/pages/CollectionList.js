@@ -71,7 +71,7 @@ const CollectionList = () => {
             onDelete={() => handleClickButtonDelete(el, idx)}
             onEdit={() => handleClickButtonEdit(el, idx)}
           />
-        }) : <div><span>No Data</span></div>}
+        }) : <div><span>No collections to display</span></div>}
       </ListWrapper>
       <CollectionNameModal
         open={openNewCol}

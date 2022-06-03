@@ -147,7 +147,7 @@ export default function CollectionModal({ open, setOpen }) {
             <CardWrapper>
                 {collectionList.map((el, idx) => {
                     // eslint-disable-next-line
-                    let alreadyIn = el.animeList?.filter((a) => bulkAdd ? a?.id == selectedId : a?.id == animeCol[0].id).length
+                    let alreadyIn = el.animeList?.filter((a) => bulkAdd ? a?.id == selectedId : a?.id == animeCol[0]?.id).length
                     return <CollectionModalCard
                         key={idx}
                         text={el.title}
@@ -159,6 +159,7 @@ export default function CollectionModal({ open, setOpen }) {
                         backgroundColor={alreadyIn ? '#33a13c' : '#4579c1'}
                     />
                 })}
+                {collectionList.length < 1 && <div><span>No collections to display</span></div>}
             </CardWrapper>
             <Button
                 variant="contained"
