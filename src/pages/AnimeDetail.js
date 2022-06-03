@@ -23,7 +23,6 @@ const SubTitle = styled.h2`
   margin-bottom: 10px;
   border-top: 1px solid #c8c8c8;
   border-bottom: 2px solid #c8c8c8;
-  margin-top: 15px;
   padding-bottom: 5px;
   width: 100%;
 `
@@ -103,11 +102,11 @@ const AnimeDetail = () => {
                 <ButtonCollection variant="contained" onClick={() => handleClickAddCollection(true)}>Add to My Collections</ButtonCollection>
                 <ButtonCollection variant="contained" onClick={() => handleClickCollectionList(true)}>Collection List</ButtonCollection>
                 <div style={{ width: '100%' }}>
-                  <SubTitle>Alternative Titles</SubTitle>
+                  <SubTitle style={{ marginTop: '15px' }}>Alternative Titles</SubTitle>
                   <div><span style={{ fontWeight: 'bold' }}>Synonyms: </span>{animeDetail.synonyms?.join(', ')}</div>
                   <div><span style={{ fontWeight: 'bold' }}>Japanese: </span>{animeDetail.title.native}</div>
                   <div><span style={{ fontWeight: 'bold' }}>English: </span>{animeDetail.title?.english || '-'}</div>
-                  <SubTitle>Information</SubTitle>
+                  <SubTitle style={{ marginTop: '15px' }}>Information</SubTitle>
                   <div><span style={{ fontWeight: 'bold' }}>Episodes: </span>{animeDetail.episodes}</div>
                   <div><span style={{ fontWeight: 'bold' }}>Genres: </span>{animeDetail.genres?.join(', ')}</div>
                 </div>
@@ -115,7 +114,7 @@ const AnimeDetail = () => {
               <Right>
                 <SubTitle>Synopsis</SubTitle>
                 <div dangerouslySetInnerHTML={{ __html: animeDetail?.description }}></div>
-                <SubTitle style={{ marginTop: '13px' }}>Characters</SubTitle>
+                <SubTitle style={{ marginTop: '15px' }}>Characters</SubTitle>
                 <CharacterListWrapper>
                   {
                     animeDetail.characters?.nodes?.map((el, idx) => {
